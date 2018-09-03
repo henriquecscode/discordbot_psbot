@@ -14,7 +14,8 @@ const client = new commando.Client({
 client.registry
     .registerDefaultTypes()
     .registerGroups([
-        ['mod', 'Managment commands']
+        ['mod', 'Managment commands - Only usable with the right permissions'],
+        ['adverts', 'Advertisements - See what is going on with the bot']
     ])
     //Add the command groups here
     .registerDefaultGroups()
