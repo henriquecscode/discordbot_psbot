@@ -20,7 +20,7 @@ class KickCommand extends Command{
             kuser.kick(); //Kick action
             console.log("Kicking detected"); //Log in glitch.com
             //logchannel.send(`${kuser} was kicked by ${sender}`); //Log in logchannel
-            return message.channel.send(`${kuser} 's Mou Shindeiru!`);
+            return message.channel.send(`${kuser} has been kicked`);
         }
 
         else {

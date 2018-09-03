@@ -21,8 +21,8 @@ class UnmuteCommand extends Command {
     run(message, { umuser }) {
         let sender = message.member;
         if (!umuser.hasPermission("MANAGE_CHANNELS")) {
-            let muterole = message.guild.roles.find('name', "Muted");
-
+            let muterole = message.guild.roles.get(process.env.MUTEROLEID)
+            
             if (umuser.roles.has(muterole.id)) {
 
                 umuser.removeRole(muterole.id); //Unmute action
@@ -31,7 +31,7 @@ class UnmuteCommand extends Command {
                 return message.channel.send(`${umuser} you have been unmuted`);
             }
             else {
-                return message.channel.send(`${sender.umuser} is not muted`);
+                return message.channel.send(`${sender} that user is not muted`);
             }
         }
     }

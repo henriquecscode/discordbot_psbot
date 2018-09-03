@@ -15,7 +15,8 @@ client.registry
     .registerDefaultTypes()
     .registerGroups([
         ['mod', 'Managment commands - Only usable with the right permissions'],
-        ['adverts', 'Advertisements - See what is going on with the bot']
+        ['adverts', 'Advertisements - See what is going on with the bot'],
+        ['admin', 'Admin commands - A list of special commands. Proceed with caution']
     ])
     //Add the command groups here
     .registerDefaultGroups()
@@ -30,19 +31,15 @@ client.on('ready', function () {
 });
 
 client.on("message", (message) => { //When there is a message in the server, gets an event and stores the message
-
-    if(message.author.bot) return; //If the author of the message is the bot
-
-    if(message.content.startsWith(client.commandoPrefix))
-    {
-        let a = message.mentions
-    var content = message.content
-    console.log(content);
-    content = content.slice(3)
-    console.log(content)
-    message.channel.send(content);
-    }
 });
+
+client.on("guildMemberAdd", (member) => { //Welcome message
+    let guild = client.guilds.get(process.env.GUILDID);
+    let welcomechannel = guild.channels.get(process.env.WELCOMECHANNELID);
+    welcomechannel.send(`Hey ${member}, welcome to ${client.guilds.get(process.env.GUILDID).name}! :peanuts::peanuts::tada:
+Please make sure read the ${guild.channels.get('304557023813697536')} & ${guild.channels.get('334704572624797699')} channels to get all the info there is to know about our server !
+Enjoy your stay here ${member}! :tada::tada:`);
+})
 
 client.login(process.env.TOKEN); //Logs in using the token
 
@@ -51,7 +48,7 @@ function Setup(){ //Overwrites the permissions for the mute rule -- Not working 
     let channels = guild.channels
     let roles = guild.roles
 
-    let mutedrole = roles.find(roles =>roles.name === 'Muted');
+    let mutedrole = roles.get(process.env.MUTEROLEID); //Gets the muted role id
     if(!mutedrole){ //If there was no mutedrole found
         guild.createRole({
             name: 'Muted',

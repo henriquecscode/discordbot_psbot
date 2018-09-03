@@ -31,7 +31,7 @@ class RemoveRoleCommand extends Command {
                 return message.channel.send(`${removeuser} has got ${removerole} removen`)
             }
             else { //We are trying to remove a role from an administrator
-                return message.channel.send(` ${sender}, you cannot remove a role from that user`);
+                return message.channel.send(` ${message.sender}, you cannot remove a role from that user`);
             }
         }
         else {

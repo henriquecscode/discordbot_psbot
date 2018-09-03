@@ -32,7 +32,7 @@ class AddRoleCommand extends Command {
                 return message.channel.send(`${adduser}, you have got the ${addrole} role`)
             }
             else { //We are trying to give a role to another administrator
-                return message.channel.send(` ${sender}, you cannot give that user a role`);
+                return message.channel.send(` ${message.sender}, you cannot give that user a role`);
             }
         }
         else {

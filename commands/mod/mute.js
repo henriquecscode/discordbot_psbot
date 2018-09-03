@@ -8,21 +8,20 @@ class MuteCommand extends Command {
             memberName: 'mute',
             description: 'Mutes the member specified',
             userPermissions: ['MANAGE_MESSAGES'],
-            args:[
+            args: [
                 {
-                key: 'muser',
-                prompt: 'Please specify a user',
-                type: 'member'
+                    key: 'muser',
+                    prompt: 'Please specify a user',
+                    type: 'member'
                 }
             ]
         })
     }
 
-    run(message, {muser}) {
+    run(message, { muser }) {
         let sender = message.member;
         if (!muser.hasPermission('MANAGE_MESSAGES')) {
-            let roles = message.guild.roles
-            let muterole = roles.find(roles => roles.name == 'Muted');
+            let muterole = message.guild.roles.get(process.env.MUTEROLEID);
 
             if (!muser.roles.has(muterole.id)) {
                 muser.addRole(muterole.id); //Mute action
