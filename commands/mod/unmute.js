@@ -7,6 +7,7 @@ class UnmuteCommand extends Command {
             group: 'mod',
             memberName: 'unmute',
             description: 'Unmutes the member specified',
+            guildOnly: true,
             userPermissions: ['MANAGE_MESSAGES'],
             args: [
                 {

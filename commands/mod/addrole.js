@@ -8,6 +8,7 @@ class AddRoleCommand extends Command {
             memberName: 'addrole',
             description: 'Adds a role to the member specified',
             userPermissions: ['ADMINISTRATOR'],
+            guildOnly: true,
             args: [
                 {
                     key: 'adduser',

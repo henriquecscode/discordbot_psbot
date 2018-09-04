@@ -7,6 +7,7 @@ class MuteCommand extends Command {
             group: 'mod',
             memberName: 'mute',
             description: 'Mutes the member specified',
+            guildOnly: true,
             userPermissions: ['MANAGE_MESSAGES'],
             args: [
                 {

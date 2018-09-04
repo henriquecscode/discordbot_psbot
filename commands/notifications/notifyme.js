@@ -11,27 +11,27 @@ class NotifyMeGetsOnlineCommand extends Command {
             args: [
 
                 {
-                    key: 'membermentioned',
-                    prompt: 'Please specify a member',
-                    type: 'member'
+                    key: 'usermentioned',
+                    prompt: 'Please specify a user',
+                    type: 'user'
                 }
             ]
         })
     }
-    run(message, {membermentioned}) {
+    run(message, {usermentioned}) {
 
-        if(membermentioned.presence.status === 'online' || membermentioned.presence.status === 'dnd'){
-            return message.channel.send(`${message.member}, that user is already online`)
+        if(usermentioned.presence.status === 'online' || usermentioned.presence.status === 'dnd'){
+            return message.channel.send(`${message.author}, that user is already online`)
         }
         //If user is already online
 
-        let status = notifications.addnotification(membermentioned.id, message.member.id); //Checks for duplicated requests while adding to the notifications
+        let status = notifications.addnotification(usermentioned.id, message.author.id); //Checks for duplicated requests while adding to the notifications
         if(status === 'duplicated'){
-            return message.channel.send(`${message.member}, you have already asked for that mention`)
+            return message.channel.send(`${message.author}, you have already asked for that mention`)
         }
         //If noitifcation was already requested
 
-        message.channel.send(`${message.member}, you will be notified when that members gets online`);
+        message.channel.send(`${message.author}, you will be notified when that members gets online`);
         console.log(`Notification request`)
 
 

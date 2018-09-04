@@ -7,6 +7,7 @@ class RemoveRoleCommand extends Command {
             group: 'mod',
             memberName: 'removerole',
             description: 'Removes a role from the member specified',
+            guildOnly: true,
             userPermissions: ['ADMINISTRATOR'],
             args: [
                 {

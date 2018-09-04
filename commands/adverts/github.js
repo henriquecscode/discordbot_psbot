@@ -10,7 +10,7 @@ class GithubCommand extends Command {
         })
     }
     run(message) {
-        message.channel.send(`${message.member}, interested in seeing how the bot works?'\n'Check out the code at https://github.com/henriquecscode/discordbot_psbot`);
+        message.channel.send(`${message.author}, interested in seeing how the bot works?'\n'Check out the code at https://github.com/henriquecscode/discordbot_psbot`);
     }
 }
 

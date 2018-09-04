@@ -8,6 +8,7 @@ class BanCommand extends Command {
             memberName: 'ban',
             description: 'Bans the member specified',
             userPermissions: ['BAN_MEMBERS'],
+            guildOnly: true,
             args: [
                 {
                     key: 'buser',

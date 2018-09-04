@@ -68,7 +68,7 @@ client.on("presenceUpdate", (oldMember, newMember) => {
         }
         //Only way I got to do this - for(var arraymember in array) did not work :/
 
-        generalchannel.send(`${tonotifystring}\n ${newMember} is now online`);
+        generalchannel.send(`${tonotifystring}\n${newMember} is now online`);
 
         notifications.removenotification(newMember.id); //Removes that member from the notifications
     }

@@ -7,6 +7,7 @@ class KickCommand extends Command{
             group: 'mod',
             memberName: 'kick',
             description: 'Kicks the member specified',
+            guildOnly: true,
             userPermissions:['KICK_MEMBERS']
         })
     }

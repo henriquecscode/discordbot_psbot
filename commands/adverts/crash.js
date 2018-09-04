@@ -22,9 +22,9 @@ class CrashCommand extends Command {
         console.log("Crash report detected");
         
         let suggestionchannel = message.guild.channels.get(process.env.SUGGESTIONSCHANNELID);
-        suggestionchannel.send(`${message.member} has reported a crash in the bot. Reason is:\n\`${data}\``);
+        suggestionchannel.send(`${message.author} has reported a crash in the bot. Reason is:\n\`${data}\``);
         
-        message.channel.send(`${message.member}, your crash report has been registered. Thank you for your contribution.\n\`${data}\``);
+        message.channel.send(`${message.author}, your crash report has been registered. Thank you for your contribution.\n\`${data}\``);
     }
 }
 module.exports = CrashCommand
