@@ -18,10 +18,11 @@ class SuggestionCommand extends Command {
     }
     run(message, { suggestion }) {
         console.log(`Suggestion detected`);
-        message.channel.send(`${message.member}, your suggestion has been acknowledged. Thank you for contributing\n\`${suggestion}\``)
         
         let suggestionschannel = message.guild.channels.get(process.env.SUGGESTIONSCHANNELID);
         suggestionschannel.send(`${message.member} has suggested:\n\`\`\`${suggestion}\`\`\``);
+
+        message.channel.send(`${message.member}, your suggestion has been acknowledged. Thank you for contributing\n\`${suggestion}\``)
     }
 }
 module.exports = SuggestionCommand

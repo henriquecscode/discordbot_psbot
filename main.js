@@ -30,7 +30,7 @@ client.registry
     .registerDefaultGroups()
     .registerDefaultCommands()
     .registerCommandsIn(path.join(__dirname, 'commands'));
-//Sets up the default discord.js option
+//Sets up the default discord.js-commando option
 
 client.on('ready', function () {
     console.log(`Ready`);
@@ -39,7 +39,7 @@ client.on('ready', function () {
     guild = client.guilds.get(process.env.GUILDID);
     generalchannel = guild.channels.get(process.env.GENERALCHANNELID);//Gets the generalchannel
     suggestionchannel = guild.channels.get(process.env.SUGGESTIONSCHANNELID); //Gets the suggestions channel
-    //Setup
+    //Setup()
 });
 
 client.on("message", (message) => { //When there is a message in the server, gets an event and stores the message
