@@ -1,4 +1,5 @@
 const { Command } = require('discord.js-commando'); //Imports the Command class from the discord.js-commando
+const configs = require('../../config.js');
 
 class MuteCommand extends Command {
     constructor(client) {
@@ -22,7 +23,7 @@ class MuteCommand extends Command {
     run(message, { muser }) {
         let sender = message.member;
         if (!muser.hasPermission('MANAGE_MESSAGES')) {
-            let muterole = message.guild.roles.get(process.env.MUTEROLEID);
+            let muterole = message.guild.roles.get(configs.muteroleid);
 
             if (!muser.roles.has(muterole.id)) {
                 muser.addRole(muterole.id); //Mute action

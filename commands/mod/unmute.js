@@ -1,4 +1,5 @@
 const { Command } = require('discord.js-commando'); //Imports the Command class from the discord.js-commando
+const configs = require('../../config.js');
 
 class UnmuteCommand extends Command {
     constructor(client) {
@@ -22,7 +23,7 @@ class UnmuteCommand extends Command {
     run(message, { umuser }) {
         let sender = message.member;
         if (!umuser.hasPermission("MANAGE_CHANNELS")) {
-            let muterole = message.guild.roles.get(process.env.MUTEROLEID)
+            let muterole = message.guild.roles.get(configs.muteroleid)
             
             if (umuser.roles.has(muterole.id)) {
 
