@@ -28,7 +28,7 @@ class RemoveRoleCommand extends Command {
                 removeuser.removeRole(removerole.id); //Remove role action
                 console.log("Remove role detected"); //Log in glitch.com
                 //logchannel.send(`${sender} has removed the role ${removerole} from ${removeuser}`); //Log in logchannel
-                return message.channel.send(`${removeuser} has got ${removerole} removen`)
+                return message.channel.send(`${removeuser} has got ${removerole} removed`)
             }
             else { //We are trying to remove a role from an administrator
                 return message.channel.send(` ${message.sender}, you cannot remove a role from that user`);
