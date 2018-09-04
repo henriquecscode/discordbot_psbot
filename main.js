@@ -42,13 +42,17 @@ client.on('ready', function () {
     //Setup()
 });
 
-client.on("message", (message) => { //When there is a message in the server, gets an event and stores the message
+client.on("message", (message) => {
 });
 
 client.on("guildMemberAdd", (member) => { //Welcome message
     generalchannel.send(`Hey ${member}, welcome to ${client.guilds.get(process.env.GUILDID).name}! :peanuts::peanuts::tada:
 Please make sure read the ${guild.channels.get('304557023813697536')} & ${guild.channels.get('334704572624797699')} channels to get all the info there is to know about our server !
 Enjoy your stay here ${member}! :tada::tada:`);
+})
+
+client.on("guildMemberRemove", (member) => { //Leave message
+    generalchannel.send(`${member} has just left ${guild}`);
 })
 
 client.on("presenceUpdate", (oldMember, newMember) => {
@@ -75,27 +79,3 @@ client.on("presenceUpdate", (oldMember, newMember) => {
 })
 
 client.login(process.env.TOKEN); //Logs in using the token
-
-function Setup() { //Overwrites the permissions for the mute rule -- Not working due to the way the server permissions are designed
-    let guild = client.guilds.get(process.env.GUILDID);
-    let channels = guild.channels
-    let roles = guild.roles
-
-    let mutedrole = roles.get(process.env.MUTEROLEID); //Gets the muted role id
-    if (!mutedrole) { //If there was no mutedrole found
-        guild.createRole({
-            name: 'Muted',
-            color: 'RED',
-        })
-        console.log("Created role");
-    }
-    else {
-        console.log("Found the role");
-    }
-
-    channels.forEach(element => {
-        element.overwritePermissions(mutedrole.id, { 'SEND_MESSAGES': false });
-    });
-    //For all of the channels in the guild, Muted role won't have permission to send messages
-
-}
