@@ -49,6 +49,10 @@ client.on("guildMemberAdd", (member) => { //Welcome message
     generalchannel.send(`Hey ${member}, welcome to ${client.guilds.get(process.env.GUILDID).name}! :peanuts::peanuts::tada:
 Please make sure read the ${guild.channels.get('304557023813697536')} & ${guild.channels.get('334704572624797699')} channels to get all the info there is to know about our server !
 Enjoy your stay here ${member}! :tada::tada:`);
+
+    let newcomerrole = guild.roles.get(process.env.NEWCOMERROLEID);
+    member.addRole(newcomerrole.id);
+    //Adds the role to the member that has just joined
 })
 
 client.on("guildMemberRemove", (member) => { //Leave message
