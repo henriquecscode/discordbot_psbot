@@ -5,7 +5,8 @@ exports.Delay = function (time, timeunit) {
     if (time) {//The user has specified a time when setting its afk status
         duration = time
         if (timeunit) { //The user has specified a timeunit
-            if (timeunit.startsWith("m")) duration = time * 60
+            if(timeunit.startsWith("s")) duration = time
+            else if (timeunit.startsWith("m")) duration = time * 60
             else if (timeunit.startsWith("h")) duration = time * 60 * 60
             else if (timeunit.startsWith("d")) duration = time * 24 * 60
             //The delay for the settimeout function is according to the timeunit
