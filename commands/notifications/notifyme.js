@@ -5,7 +5,7 @@ class NotifyMeGetsOnlineCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'notifyme',
-            group: 'notifyme',
+            group: 'notifications',
             memberName: 'notifyme',
             description: 'Get a notification when someone gets online',
             args: [
@@ -25,7 +25,7 @@ class NotifyMeGetsOnlineCommand extends Command {
         }
         //If user is already online
 
-        let status = notifications.addnotification(usermentioned.id, message.author.id); //Checks for duplicated requests while adding to the notifications
+        let status = notifications.AddNotifyme(usermentioned.id, message.author.id); //Checks for duplicated requests while adding to the notifications
         if(status === 'duplicated'){
             return message.channel.send(`${message.author}, you have already asked for that mention`)
         }
