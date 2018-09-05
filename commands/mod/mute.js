@@ -23,10 +23,9 @@ class MuteCommand extends Command {
     run(message, { muser }) {
         let sender = message.member;
         if (!muser.hasPermission('MANAGE_MESSAGES')) {
-            let muterole = message.guild.roles.get(configs.muteroleid);
 
-            if (!muser.roles.has(muterole.id)) {
-                muser.addRole(muterole.id); //Mute action
+            if (!muser.roles.has(configs.muteroleid)) {
+                muser.addRole(configs.muteroleid); //Mute action
                 console.log("Mute detected"); //Log in glitch.com
                 //logchannel.send(`${muser} was muted by ${sender}`); //Log in logchannel
                 return message.channel.send(`${muser} You are muted now`);
