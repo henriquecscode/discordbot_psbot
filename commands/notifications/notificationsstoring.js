@@ -4,7 +4,8 @@ exports.CreateMemberNotifications = function (userid) {
 
     notifications[userid] = {
         tonotify: [],
-        afk: { time: null, timeunit: null, reason: null }
+        afk: { time: null, timeunit: null, reason: null },
+        mute: {time: null, timeunit: null, reason: null }
     }
 }
 
@@ -55,6 +56,20 @@ exports.AddAfk = function (userid, time, timeunit, reason) { //Adds the afk to t
 
 exports.RemoveAfk = async function (userid) { //Removes the afk from that user
     notifications[userid].afk = { time: null, timeunit: null, reason: null }
+}
+
+exports.ToMute = function(userid){ //Returns the mute status as an array
+    return [notifications[userid].mute.time, notifications[userid].mute.timeunit, notifications[userid].mute.reason];
+}
+
+exports.AddMute = function(userid, time, timeunit, reason){ //Adds the mute to that user
+    let mutestatus = notifications[userid].mute;
+
+    return status = AddNotification(mutestatus, time, timeunit, reason);
+}
+
+exports.RemoveMute = function(userid, time, timeunit, reason){ //Removes the mute from that user
+    notifications[userid].mute = { time: null, timeunit: null, reason: null }
 }
 
 function AddNotification(notification, time, timeunit, reason){ //Adds the status data to the notification object

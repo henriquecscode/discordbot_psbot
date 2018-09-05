@@ -12,13 +12,12 @@ class AFKCommand extends Command {
             memberName: 'afk',
             description: 'Set your role to afk',
             guildOnly: true,
-            details: 'p$afk <?number<?timeunit> <?reason>\nTime units: \`minutes, min, hours, days`',
             args: [
 
                 {
                     key: 'data',
-                    prompt: 'Please specify a user',
                     type: 'string',
+                    prompt: ' Please insert a valid duration and reason',
                     default: ''
                 }
             ]
@@ -37,7 +36,7 @@ class AFKCommand extends Command {
             message.channel.send(`${message.member}, you already have the afk role.\nDo p$unafk to remove it.`)
         }
         else { //There is going to be a new delay set
-            if (status === 'updated') { //Updates the afk status and resets the time to remove the role
+            if (status === 'updated') { //Updates the afk status
                 message.channel.send(`${message.member}, your afk status has been updated\n${durationreason}`);
             }
             else { //Creates the afk status and removes the role after the time specified
@@ -45,10 +44,15 @@ class AFKCommand extends Command {
                 message.member.addRole(configs.afkroleid);
             }
 
-            if(afksettings[0]){ //There was a delay time specified
+            if (afksettings[0]) { //There was a delay time specified
                 await delay.Delay(afksettings[0], afksettings[1]);
-                notifications.RemoveAfk(message.author.id);
-                message.member.removeRole(configs.afkroleid);
+
+                let datasettings = notifications.ToAfk(message.author.id)
+                if (afksettings[0] === afksettings[0] && afksettings[1] === datasettings[1] && afksettings[2] === datasettings[2]) {
+                    //The status has not been changed, therefore the time is the same
+                    notifications.RemoveAfk(message.author.id);
+                    message.member.removeRole(configs.afkroleid);
+                }
             }
         }
     }
