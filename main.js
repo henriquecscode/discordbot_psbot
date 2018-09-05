@@ -6,6 +6,7 @@ const path = require('path'); //To use path
 
 const notifications = require('./commands/notifications/notificationsstoring.js'); //Imports notificationsstoring's functions
 const configs = require('./config.js') //Imports the id configurations
+const delay = require('./services/delay.js');
 
 console.log(configs);
 
@@ -56,7 +57,9 @@ client.on("message", (message) => {
     if(message.author.bot) return
     message.mentions.members.forEach(element => {
         if(element.roles.has(configs.afkroleid)){
-            message.channel.send(`${message.member}, ${element} is now afk. Please try later.`);
+            let status = notifications.ToAfk(message.member.id);
+            let durationreason = delay.DurationReason(status[0],status[1], status[2]);
+            message.channel.send(`${message.member}, ${element} is now afk. Please try later.\n${durationreason}`);
         }
     });
     //If the user is afk it will say so

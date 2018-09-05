@@ -16,12 +16,11 @@ class UnAFKCommand extends Command {
     }
 
     run(message){
-
+        notifications.RemoveAfk(message.author.id); //Removes the role and the data of the user
         if(!message.member.roles.has(configs.afkroleid)){
             return message.channel.send(`${message.member}, you don't have the afk role.\nDo p$afk to add it`);
         }
 
-        notifications.RemoveAfk(message.author.id); //Removes the role and the data of the user
         message.member.removeRole(configs.afkroleid);
 
         message.channel.send(`Your afk role has been removed`);
