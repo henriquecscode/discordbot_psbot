@@ -56,6 +56,7 @@ client.on('ready', function () {
 
 client.on("message", (message) => {
     if(message.author.bot) return
+
     message.mentions.members.forEach(element => {
         if(element.roles.has(configs.afkroleid)){
             let status = notifications.ToAfk(element.id); //Gets the afk status of the person that is afk

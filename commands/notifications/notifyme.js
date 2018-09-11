@@ -2,7 +2,7 @@ const { Command } = require('discord.js-commando'); //Imports the Command class 
 const notifications = require('./notificationsstoring.js'); //Imports notificationsstoring's functions
 const configs = require('../../config.js');
 
-class NotifyMeGetsOnlineCommand extends Command {
+class NotifyMe extends Command {
     constructor(client) {
         super(client, {
             name: 'notifyme',
@@ -40,4 +40,4 @@ class NotifyMeGetsOnlineCommand extends Command {
 
 }
 
-module.exports = NotifyMeGetsOnlineCommand
+module.exports = NotifyMe
