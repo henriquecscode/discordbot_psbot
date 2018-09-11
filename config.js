@@ -1,5 +1,5 @@
 const configs = {
-    prefix: "P$",
+    prefix: "p$",
     guildid: '304554929312235521',
 
     muteroleid: '484112843956944897',

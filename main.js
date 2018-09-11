@@ -5,6 +5,7 @@ console.log("Running"); //First thing that outputs in the console
 const path = require('path'); //To use path
 
 const notifications = require('./commands/notifications/notificationsstoring.js'); //Imports notificationsstoring's functions
+const notify = require('./services/notify.js'); //Imports the notify
 const configs = require('./config.js') //Imports the id configurations
 const delay = require('./services/delay.js');
 
@@ -63,6 +64,14 @@ client.on("message", (message) => {
         }
     });
     //If the user is afk it will say so
+
+    if(message.member.roles.has(configs.afkroleid) && !message.content.startsWith(configs.prefix)){ //The person talking is afk and is not using a bot command
+        console.log(`Got inside loop`);
+        message.member.removeRole(configs.afkroleid); //Removes the afk role
+        notifications.RemoveAfk(message.member.id);
+        message.channel.send(`${message.member}, welcome back!\nYour afk role has now been removed`);
+    }
+    //Unafks someone if he talks
     
 });
 
@@ -90,21 +99,7 @@ client.on("presenceUpdate", (oldMember, newMember) => {
     let newMemberstatus = newMember.presence.status
 
     if(oldMemberstatus === 'offline' && (newMemberstatus === 'online' || newMemberstatus === 'dnd')){
-        let tonotify = notifications.Tonotify(newMember.id)
-
-        if(tonotify.length === 0){// This member has not been requested
-            return
-        }
-        
-        var tonotifystring = ''
-        for(var i = 0; i < tonotify.length; i++){
-            tonotifystring += `<@${tonotify[i]}>, `;
-        }
-        //Only way I got to do this - for(var arraymember in array) did not work :/
-
-         generalchannel.send(`${tonotifystring}\n${newMember} is now online`);
-
-        notifications.RemoveNotifyme(newMember.id); //Removes that member from the notifications
+        notify.DoNotify(generalchannel, newMember);
     }
 })
 

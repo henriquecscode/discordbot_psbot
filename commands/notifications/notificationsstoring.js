@@ -73,17 +73,17 @@ exports.RemoveMute = function(userid, time, timeunit, reason){ //Removes the mut
 }
 
 function AddNotification(notification, time, timeunit, reason){ //Adds the status data to the notification object
-    if (!notification.time && !notification.timeunit && !notification.reason) { //There is no status yet
-        notification.time = time;
-        notification.timeunit = timeunit;
-        notification.reason = reason;
-        return 'created'
-    }
-    else if (notification.time === time && notification.timeunit === timeunit && notification.reason === reason) {
+    if (notification.time === time && notification.timeunit === timeunit && notification.reason === reason) {
         //The user has said the same thing twice
         return 'duplicated'
     }
     //else if ((notification.time !== time || notification.timeunit !== timeunit || notification.reason !== reason) && (notification.time || notification.timeunit || notification.reason)) {
+    else if (!notification.time && !notification.timeunit && !notification.reason) { //There is no status yet
+            notification.time = time;
+            notification.timeunit = timeunit;
+            notification.reason = reason;
+            return 'created'
+        }
     else {
         //An update occurs when a variable is changed (first part of the condition) AND there was already data in the status
         //The user has updated its afk status

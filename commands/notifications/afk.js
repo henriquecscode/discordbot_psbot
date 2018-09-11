@@ -1,5 +1,6 @@
 const { Command } = require('discord.js-commando'); //Imports the Command class from the discord.js-commando
 const notifications = require('./notificationsstoring.js'); //Imports notificationsstoring's functions
+const notify = require('../../services/notify.js'); //Imports the notification
 const configs = require('../../config.js'); //configs
 const delay = require('../../services/delay.js'); //Delay
 
@@ -32,8 +33,12 @@ class AFKCommand extends Command {
         let status = notifications.AddAfk(message.author.id, afksettings[0], afksettings[1], afksettings[2]); //Adds the data to the user, according to any previous afk status
         let durationreason = delay.DurationReason(afksettings[0], afksettings[1], afksettings[2]);
 
-        if (status === 'duplicated') { //Already asked for that afk status
+        if (status === 'duplicated' && message.member.roles.has(configs.afkroleid)) { //Already asked for that afk status
             message.channel.send(`${message.member}, you already have the afk role.\nDo p$unafk to remove it.`)
+        }
+        else if( status === 'duplicated' && !message.member.roles.has(configs.afkroleid)){ //Does not have the the role, but an empty afk status
+            message.channel.send(`${message.member}, you have been set afk`);
+            message.member.addRole(configs.afkroleid);
         }
         else { //There is going to be a new delay set
             if (status === 'updated') { //Updates the afk status
@@ -52,6 +57,10 @@ class AFKCommand extends Command {
                     //The status has not been changed, therefore the time is the same
                     notifications.RemoveAfk(message.author.id);
                     message.member.removeRole(configs.afkroleid);
+
+                    let generalchannel = message.channel.guild.channels.get(configs.generalchannelid);
+                    notify.DoNotify(generalchannel, message.member);
+
                 }
             }
         }
