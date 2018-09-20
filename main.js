@@ -55,7 +55,7 @@ client.on('ready', function () {
 });
 
 client.on("message", (message) => {
-    if(message.author.bot) return
+    if(message.author.bot) returnz
 
     message.mentions.members.forEach(element => {
         if(element.roles.has(configs.afkroleid)){
