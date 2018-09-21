@@ -55,15 +55,15 @@ client.on('ready', function () {
 });
 
 client.on("message", (message) => {
-    if(message.author.bot) returnz
-
+    if(message.author.bot) return
+    if(message.mentions.members){
     message.mentions.members.forEach(element => {
         if(element.roles.has(configs.afkroleid)){
             let status = notifications.ToAfk(element.id); //Gets the afk status of the person that is afk
             let durationreason = delay.DurationReason(status[0],status[1], status[2]);
             message.channel.send(`${message.member}, ${element} is now afk. Please try later.\n${durationreason}`);
         }
-    });
+    });}
     //If the user is afk it will say so
 
     if(message.member.roles.has(configs.afkroleid) && !message.content.startsWith(configs.prefix)){ //The person talking is afk and is not using a bot command
